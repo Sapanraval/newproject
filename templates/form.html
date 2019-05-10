@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+{% block content %}
+
+   <hr class="m-0">
+   <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="skills">
+      <div class="w-100">
+        <h2 class="mb-5">Contact Me</h2>
+        <form method="post" action="/form">
+            {{ form.hidden_tag() }}
+                <div class="form-group">
+                    {{ form.name.label(class="form-control-label") }}
+
+                    {% if form.name.errors %}
+                        {{ form.name(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.name.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.name(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.email.label(class="form-control-label") }}
+                    {% if form.email.errors %}
+                        {{ form.email(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.email(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.subject.label(class="form-control-label") }}
+                    {% if form.subject.errors %}
+                        {{ form.subject(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.subject.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.subject(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.message.label(class="form-control-label") }}
+                    {% if form.message.errors %}
+                        {{ form.message(rows="5",class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.message.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.message(rows="5",class="form-control") }}
+                    {% endif %}
+                </div>
+            <div class="form-group">
+                {{ form.submit(class="button") }}
+            </div>
+        </form>
+{% endblock content%}
