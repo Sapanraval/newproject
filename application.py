@@ -2,9 +2,10 @@ from flask import Flask, abort, redirect, render_template, request, flash, url_f
 import smtplib
 from form import ContactForm
 from flask_mail import Mail, Message
-from flask_wtf import Form 
+from flask_wtf import Form
 from wtforms import TextField, TextAreaField, SubmitField, validators, ValidationError
 import os
+import sqlalchemy
 
 mail = Mail()
 
@@ -54,13 +55,12 @@ def contact():
             %s
             """ % (form.name.data, form.email.data, form.message.data)
             mail.send(msg)
-            
+
             flash(f'Thank you for your Message {form.name.data}! I will reach out to you soon', 'success')
             return redirect(url_for('index'))
     return render_template('form.html',form=form)
 
 if __name__ == '__main__':
   app.run(debug=True)
-  
-
-    
+  port = int(os.environ.get("PORT", 5000))
+  app.run(host='0.0.0.0', port=port)
